@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CoffeeAppDay1a</string>
+    <string name="drink_icon">Drink icon</string>
+    <string name="drinks_menu_title">Drinks Menu</string>
+</resources>
