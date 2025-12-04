@@ -1,72 +1,62 @@
 package com.example.coffeeappday1a.ui
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.coffeeappday1a.R
 import com.example.coffeeappday1a.data.model.CoffeeDrink
-import com.example.coffeeappday1a.data.model.Size
+import com.example.coffeeappday1a.databinding.ItemCartBinding
 
 class CartAdapter(
-    private var items: MutableList<CoffeeDrink>,
+    private val items: MutableList<CoffeeDrink>,
     private val onQuantityChanged: () -> Unit
-) : RecyclerView.Adapter<CartAdapter.CartVH>() {
+) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
-    inner class CartVH(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.cartItemName)
-        val volume: TextView = view.findViewById(R.id.cartItemVolume)
-        val qty: TextView = view.findViewById(R.id.cartQty)
-        val price: TextView = view.findViewById(R.id.cartItemPrice)
-        val btnPlus: Button = view.findViewById(R.id.btnPlus)
-        val btnMinus: Button = view.findViewById(R.id.btnMinus)
-    }
+    inner class CartViewHolder(val binding: ItemCartBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartVH {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_cart, parent, false)
-        return CartVH(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
+        val binding = ItemCartBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return CartViewHolder(binding)
     }
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: CartVH, position: Int) {
+    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val item = items[position]
 
-        holder.name.text = item.name
+        holder.binding.cartItemName.text = item.name
 
-        val sizeText = when (item.size) {
-            Size.SMALL -> "Small"
-            Size.MEDIUM -> "Medium"
-            Size.LARGE -> "Large"
-        }
-        holder.volume.text = "$sizeText • ${item.volumeMl} ml"
+        // added volume
+        holder.binding.cartVolume.text = "${item.size.name} • ${item.volumeMl} ml"
 
-        holder.qty.text = item.quantity.toString()
-        holder.price.text = String.format("$%.2f", item.price * item.quantity)
+        // quantity
+        holder.binding.cartQty.text = item.quantity.toString()
 
-        holder.btnPlus.setOnClickListener {
+        // price
+        holder.binding.cartItemPrice.text =
+            String.format("$%.2f", item.price * item.quantity)
+
+        holder.binding.btnPlus.setOnClickListener {
             item.quantity++
             notifyItemChanged(position)
             onQuantityChanged()
         }
 
-        holder.btnMinus.setOnClickListener {
+        holder.binding.btnMinus.setOnClickListener {
             if (item.quantity > 1) {
                 item.quantity--
                 notifyItemChanged(position)
             } else {
+                val removed = items[position]
+                CartManager.remove(removed)
                 items.removeAt(position)
                 notifyItemRemoved(position)
             }
             onQuantityChanged()
         }
-    }
-
-    fun update(newList: List<CoffeeDrink>) {
-        items = newList.toMutableList()
-        notifyDataSetChanged()
     }
 }

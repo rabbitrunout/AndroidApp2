@@ -22,28 +22,24 @@ class DrinkDetailsActivity : AppCompatActivity() {
 
         drink = intent.getSerializableExtra("drink") as CoffeeDrink
 
-        selectedSize = drink.size
-        selectedVolume = drink.volumeMl
-
         binding.drinkName.text = drink.name
         binding.drinkType.text = drink.type.name
         binding.drinkVolume.text = "${drink.volumeMl} ml"
         binding.drinkPrice.text = String.format("$%.2f", drink.price)
 
-        // тут поставь свои id кнопок для размеров
-        binding.btnSmall.setOnClickListener {
+        binding.radioSmall.setOnClickListener {
             selectedSize = Size.SMALL
             selectedVolume = 250
             binding.drinkVolume.text = "250 ml"
         }
 
-        binding.btnMedium.setOnClickListener {
+        binding.radioMedium.setOnClickListener {
             selectedSize = Size.MEDIUM
             selectedVolume = 350
             binding.drinkVolume.text = "350 ml"
         }
 
-        binding.btnLarge.setOnClickListener {
+        binding.radioLarge.setOnClickListener {
             selectedSize = Size.LARGE
             selectedVolume = 450
             binding.drinkVolume.text = "450 ml"
@@ -54,6 +50,7 @@ class DrinkDetailsActivity : AppCompatActivity() {
                 size = selectedSize,
                 volumeMl = selectedVolume
             )
+
             CartManager.add(drinkForCart)
             Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show()
         }

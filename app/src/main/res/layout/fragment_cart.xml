@@ -2,53 +2,61 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@color/coffee_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!-- Заголовок -->
     <TextView
         android:id="@+id/cartTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Your Cart"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textColor="@color/coffee_text_primary"
+        android:paddingBottom="8dp" />
 
-    <!-- Текст, когда корзина пустая -->
-    <TextView
-        android:id="@+id/tvEmpty"
-        android:text="Your cart is empty ☕"
-        android:textSize="16sp"
-        android:paddingTop="24dp"
-        android:gravity="center"
-        android:visibility="gone"
+    <!-- Разделитель -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="1dp"
+        android:background="@color/coffee_divider"
+        android:layout_marginBottom="8dp" />
 
-    <!-- Список товаров -->
+    <!-- Список позиций -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
         android:layout_weight="1" />
 
     <!-- Итоговая сумма -->
-    <TextView
-        android:id="@+id/totalPriceText"
-        android:text="Total: $0.00"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:paddingTop="8dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="8dp">
 
-    <!-- Кнопка оформления заказа -->
-    <Button
-        android:id="@+id/btnCheckout"
-        android:text="Checkout"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:text="Total:"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textColor="@color/coffee_text_primary" />
+
+        <TextView
+            android:id="@+id/cartTotalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$0.00"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/coffee_primary" />
+    </LinearLayout>
 
 </LinearLayout>

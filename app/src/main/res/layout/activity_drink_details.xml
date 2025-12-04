@@ -1,80 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:background="@color/coffee_bg">
 
-    <TextView
-        android:id="@+id/drinkName"
-        android:text="Latte"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/drinkType"
-        android:text="COFFEE"
-        android:textSize="16sp"
-        android:layout_marginTop="4dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/drinkVolume"
-        android:text="350 ml"
-        android:textSize="18sp"
-        android:layout_marginTop="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/drinkPrice"
-        android:text="$3.00"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="4dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-
-    <!-- Кнопки размера -->
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <Button
-            android:id="@+id/btnSmall"
-            android:text="Small"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btnMedium"
-            android:text="Medium"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <!-- Название -->
+        <TextView
+            android:id="@+id/drinkName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
+            android:text="Latte"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/coffee_text_primary" />
 
+        <!-- Тип -->
+        <TextView
+            android:id="@+id/drinkType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="COFFEE"
+            android:textSize="16sp"
+            android:textColor="@color/coffee_text_secondary"
+            android:layout_marginTop="4dp" />
+
+        <!-- Объём -->
+        <TextView
+            android:id="@+id/drinkVolume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="350 ml"
+            android:textSize="16sp"
+            android:textColor="@color/coffee_text_secondary"
+            android:layout_marginTop="4dp" />
+
+        <!-- Цена -->
+        <TextView
+            android:id="@+id/drinkPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$3.25"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/coffee_primary"
+            android:layout_marginTop="8dp" />
+
+        <!-- Подзаголовок размеров -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose size"
+            android:textSize="16sp"
+            android:textColor="@color/coffee_text_primary"
+            android:layout_marginTop="20dp" />
+
+        <!-- Радио-группа размеров -->
+        <RadioGroup
+            android:id="@+id/radioSizeGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="8dp">
+
+            <RadioButton
+                android:id="@+id/radioSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Small"
+                android:textColor="@color/coffee_text_primary" />
+
+            <RadioButton
+                android:id="@+id/radioMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medium"
+                android:checked="true"
+                android:layout_marginStart="24dp"
+                android:textColor="@color/coffee_text_primary" />
+
+            <RadioButton
+                android:id="@+id/radioLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Large"
+                android:layout_marginStart="24dp"
+                android:textColor="@color/coffee_text_primary" />
+        </RadioGroup>
+
+        <!-- Кнопка добавления -->
         <Button
-            android:id="@+id/btnLarge"
-            android:text="Large"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:id="@+id/btnAddToCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to cart"
+            android:textAllCaps="false"
+            android:layout_marginTop="24dp"
+            android:paddingVertical="10dp"
+            android:textSize="16sp"
+            android:backgroundTint="@color/coffee_primary"
+            android:textColor="@android:color/white" />
+
     </LinearLayout>
-
-
-    <Button
-        android:id="@+id/btnAddToCart"
-        android:text="Add to cart"
-        android:layout_marginTop="24dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+</ScrollView>
