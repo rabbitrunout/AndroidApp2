@@ -1,12 +1,12 @@
 package com.example.coffeeappday1a.data.model
 
+import java.io.Serializable
+
 data class CoffeeDrink(
-    val id: Int,
+    val id: Long,
     val name: String,
     val type: DrinkType,
-    val size: Size,
-    val volumeMl: Int,
+    val size: Size = Size.MEDIUM,
+    val volumeMl: Int = 300,
     val price: Double
-) : java.io.Serializable
-
-
+) : Serializable
