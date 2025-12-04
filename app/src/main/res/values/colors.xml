@@ -1,14 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- базовые -->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 
-    <!-- Starbucks-палитра -->
-    <color name="coffee_primary">#006241</color>
-    <color name="coffee_bg">#F5F3EE</color>
-    <color name="coffee_card">#FFFFFFFF</color>
-    <color name="coffee_text_primary">#1F2933</color>
-    <color name="coffee_text_secondary">#6B7280</color>
-    <color name="coffee_divider">#E5E7EB</color>
-    <color name="coffee_ripple">#1A006241</color>
+    <!-- Основная палитра Starbucks -->
+    <color name="coffee_primary">#00704A</color> <!-- зеленый Starbucks -->
+    <color name="coffee_primary_dark">#004C32</color>
+    <color name="coffee_bg">#F7F2EE</color> <!-- светлый фон -->
+    <color name="coffee_card">#FFFFFF</color>
+
+    <!-- Текст -->
+    <color name="coffee_text_primary">#333333</color>
+    <color name="coffee_text_secondary">#777777</color>
+
+    <!-- Разделители -->
+    <color name="coffee_divider">#DDDDDD</color>
+
+    <!-- Белый / чёрный если используются -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="coffee_ripple">#3300704A</color>
+
+
 </resources>
