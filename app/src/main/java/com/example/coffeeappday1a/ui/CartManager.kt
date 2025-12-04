@@ -7,7 +7,7 @@ object CartManager {
     private val items = mutableListOf<CoffeeDrink>()
 
     fun add(item: CoffeeDrink) {
-        val existing = items.find { it.id == item.id }
+        val existing = items.find { it.id == item.id && it.size == item.size && it.volumeMl == item.volumeMl }
         if (existing != null) {
             existing.quantity++
         } else {
@@ -21,7 +21,7 @@ object CartManager {
         items.sumOf { it.price * it.quantity }
 
     fun getTotalQuantity(): Int =
-        items.sumOf { it.quantity }   // 👈 для бейджа
+        items.sumOf { it.quantity }
 
     fun removeAt(index: Int) {
         if (index in items.indices) {

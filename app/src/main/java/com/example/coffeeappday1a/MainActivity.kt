@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // стартовый экран
         replaceFragment(HomeFragment())
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
@@ -44,13 +43,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // нарисовать бейдж при старте
         updateCartBadge()
     }
 
     override fun onResume() {
         super.onResume()
-        // Обновляем бейдж, когда возвращаемся на MainActivity
         updateCartBadge()
     }
 
@@ -61,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun updateCartBadge() {
+    fun updateCartBadge() {
         val count = CartManager.getTotalQuantity()
 
         val bottomNav = binding.bottomNavigation
@@ -71,7 +68,6 @@ class MainActivity : AppCompatActivity() {
             badge.number = count
             badge.badgeGravity = BadgeDrawable.TOP_END
         } else {
-            // если корзина пустая — убираем бейдж
             bottomNav.removeBadge(R.id.nav_cart)
         }
     }

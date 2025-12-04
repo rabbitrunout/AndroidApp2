@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.coffeeappday1a.MainActivity
 import com.example.coffeeappday1a.databinding.FragmentCartBinding
 
 class CartFragment : Fragment() {
@@ -30,19 +31,17 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // адаптер
         adapter = CartAdapter(
             CartManager.getItems().toMutableList()
         ) {
             updateTotal()
             updateEmptyState()
+            (activity as? MainActivity)?.updateCartBadge()
         }
 
-        // список
         binding.cartRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.cartRecyclerView.adapter = adapter
 
-        // свайп влево/вправо для удаления
         val swipeHelper = ItemTouchHelper(object :
             ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
@@ -58,12 +57,12 @@ class CartFragment : Fragment() {
                 adapter.update(CartManager.getItems())
                 updateTotal()
                 updateEmptyState()
+                (activity as? MainActivity)?.updateCartBadge()
             }
         })
 
         swipeHelper.attachToRecyclerView(binding.cartRecyclerView)
 
-        // кнопка Checkout
         binding.btnCheckout.setOnClickListener {
             if (CartManager.getItems().isEmpty()) {
                 Toast.makeText(requireContext(), "Your cart is empty", Toast.LENGTH_SHORT).show()
@@ -73,6 +72,7 @@ class CartFragment : Fragment() {
                 adapter.update(CartManager.getItems())
                 updateTotal()
                 updateEmptyState()
+                (activity as? MainActivity)?.updateCartBadge()
             }
         }
 

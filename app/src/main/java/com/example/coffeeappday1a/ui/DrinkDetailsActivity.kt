@@ -3,7 +3,6 @@ package com.example.coffeeappday1a.ui
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.coffeeappday1a.R
 import com.example.coffeeappday1a.data.model.CoffeeDrink
 import com.example.coffeeappday1a.data.model.Size
 import com.example.coffeeappday1a.databinding.ActivityDrinkDetailsBinding
@@ -13,6 +12,9 @@ class DrinkDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDrinkDetailsBinding
     private lateinit var drink: CoffeeDrink
 
+    private var selectedSize: Size = Size.MEDIUM
+    private var selectedVolume: Int = 350
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDrinkDetailsBinding.inflate(layoutInflater)
@@ -20,37 +22,40 @@ class DrinkDetailsActivity : AppCompatActivity() {
 
         drink = intent.getSerializableExtra("drink") as CoffeeDrink
 
-        showDrink()
-        setupSizeSelector()
-        setupAddToCart()
-    }
+        selectedSize = drink.size
+        selectedVolume = drink.volumeMl
 
-    private fun showDrink() {
         binding.drinkName.text = drink.name
-        binding.drinkType.text = drink.type.name.lowercase().replaceFirstChar(Char::uppercase)
-        binding.drinkPrice.text = "$${drink.price}"
-        binding.drinkIcon.setImageResource(R.drawable.ic_coffee)
-    }
+        binding.drinkType.text = drink.type.name
+        binding.drinkVolume.text = "${drink.volumeMl} ml"
+        binding.drinkPrice.text = String.format("$%.2f", drink.price)
 
-    private fun setupSizeSelector() {
-        binding.sizeGroup.setOnCheckedChangeListener { _, checkedId ->
-            val newPrice = when (checkedId) {
-                R.id.sizeSmall -> drink.price - 0.25
-                R.id.sizeMedium -> drink.price
-                R.id.sizeLarge -> drink.price + 0.50
-                else -> drink.price
-            }
-            binding.drinkPrice.text = "$${String.format("%.2f", newPrice)}"
+        // тут поставь свои id кнопок для размеров
+        binding.btnSmall.setOnClickListener {
+            selectedSize = Size.SMALL
+            selectedVolume = 250
+            binding.drinkVolume.text = "250 ml"
         }
-    }
 
-    private fun setupAddToCart() {
+        binding.btnMedium.setOnClickListener {
+            selectedSize = Size.MEDIUM
+            selectedVolume = 350
+            binding.drinkVolume.text = "350 ml"
+        }
+
+        binding.btnLarge.setOnClickListener {
+            selectedSize = Size.LARGE
+            selectedVolume = 450
+            binding.drinkVolume.text = "450 ml"
+        }
+
         binding.btnAddToCart.setOnClickListener {
-            CartManager.add(drink)
+            val drinkForCart = drink.copy(
+                size = selectedSize,
+                volumeMl = selectedVolume
+            )
+            CartManager.add(drinkForCart)
             Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show()
         }
-
-
-
     }
 }

@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coffeeappday1a.R
 import com.example.coffeeappday1a.data.model.CoffeeDrink
+import com.example.coffeeappday1a.data.model.Size
 
 class CartAdapter(
     private var items: MutableList<CoffeeDrink>,
@@ -16,6 +17,7 @@ class CartAdapter(
 
     inner class CartVH(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.cartItemName)
+        val volume: TextView = view.findViewById(R.id.cartItemVolume)
         val qty: TextView = view.findViewById(R.id.cartQty)
         val price: TextView = view.findViewById(R.id.cartItemPrice)
         val btnPlus: Button = view.findViewById(R.id.btnPlus)
@@ -34,6 +36,14 @@ class CartAdapter(
         val item = items[position]
 
         holder.name.text = item.name
+
+        val sizeText = when (item.size) {
+            Size.SMALL -> "Small"
+            Size.MEDIUM -> "Medium"
+            Size.LARGE -> "Large"
+        }
+        holder.volume.text = "$sizeText • ${item.volumeMl} ml"
+
         holder.qty.text = item.quantity.toString()
         holder.price.text = String.format("$%.2f", item.price * item.quantity)
 
