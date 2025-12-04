@@ -20,6 +20,9 @@ object CartManager {
     fun getTotalPrice(): Double =
         items.sumOf { it.price * it.quantity }
 
+    fun getTotalQuantity(): Int =
+        items.sumOf { it.quantity }   // 👈 для бейджа
+
     fun removeAt(index: Int) {
         if (index in items.indices) {
             items.removeAt(index)
